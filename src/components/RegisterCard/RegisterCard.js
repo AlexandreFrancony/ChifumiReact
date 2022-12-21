@@ -1,36 +1,34 @@
-import React from 'react'
+import React, {useState} from 'react';
 import './styles.css'
-import { useState } from 'react';
-
-const [username, setUsername] = useState(null);
-const [password,setPassword] = useState(null);
-const [confirmPassword,setConfirmPassword] = useState(null);
-
-const handleInputChange = (e) => {
-  const {id , value} = e.target;
-  if(id === "username"){
-      setUsername(value);
-  }
-  if(id === "password"){
-      setPassword(value);
-  }
-  if(id === "confirmPassword"){
-      setConfirmPassword(value);
-  }
-}
-
-const handleSubmit  = () => {
-  console.log(username,password,confirmPassword);
-}
 
 export default function RegisterCard() {
+  const [username, setUsername] = useState(null);
+  const [password,setPassword] = useState(null);
+  const [confirmPassword,setConfirmPassword] = useState(null);
+
+  const handleInputChange = (e) => {
+    const {id , value} = e.target;
+    if(id === "username"){
+        setUsername(value);
+    }
+    if(id === "password"){
+        setPassword(value);
+    }
+    if(id === "confirmPassword"){
+        setConfirmPassword(value);
+    }
+  }
+
+  const handleSubmit  = () => {
+    console.log(username,password,confirmPassword);
+  }
+
   return (
     <>
       <div className="form">
         <div className="title">Registration Form</div>
         <div className="username">
           <label className="form-label">Username</label><br />
-          <input className="form-input" type="text" placeholder="Username"/>
           <input className="form-input" type="text"  id="username" value={username} onChange = {(e) => handleInputChange(e)} placeholder="Username"/>
         </div>
         <div className="password">
