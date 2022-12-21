@@ -1,10 +1,10 @@
 import React from 'react'
-import './styles.css';
+import './styles.css'
 
-function Header() {
+export default function Header() {
   return (
-    <div>Header</div>
+    <div className="header">
+      <h1>Chi-Fou-Mi</h1>
+    </div>
   )
 }
-
-export default Header
