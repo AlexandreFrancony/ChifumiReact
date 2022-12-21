@@ -1,10 +1,9 @@
 import React from 'react'
+import './styles.css'
+import RegisterCard from '../../components/RegisterCard/RegisterCard'
 
-function Register() {
+export default function Register() {
   return (
-    <div>Register</div>
-    //First push on my register!
+    <RegisterCard />
   )
 }
-
-export default Register
