@@ -2,43 +2,73 @@ import React, {useState} from 'react';
 import './styles.css'
 
 export default function RegisterCard() {
-  const [username, setUsername] = useState(null);
-  const [password,setPassword] = useState(null);
 
-  const handleInputChange = (e) => {
+  const [username, setUsername] = useState("");
+  const [password,setPassword] = useState("");
+
+  function handleInputChange(e) {
     const {id , value} = e.target;
-    if(id === "username"){
+    switch (id) {
+      case "username":
         setUsername(value);
-    }
-    if(id === "password"){
+        break;
+      case "password":
         setPassword(value);
+        break;
+      default:
+        console.log("error in switch handleInputChange");
+        break;
     }
   }
 
-  const handleSubmit  = () => {
-    console.log(username,password);
-  }
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    const requestOptions = {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ username: username, password: password})
+  };
+  fetch('http://fauques.freeboxos.fr:3000/register', requestOptions)
+      .then(response => response.json())
+      .then(data => console.log(data));
+  };
 
   return (
     <>
-      <div className="form">
-        <div className="title">Registration Form</div>
+      <form className="form" autoComplete="off" onSubmit={handleSubmit}>
+      <div className="title">Registration Form</div>
         <div className="username">
           <label className="form-label">Username</label><br />
-          <input className="form-input" type="text"  id="username" value={username} onChange = {(e) => handleInputChange(e)} placeholder="Username"/>
+          <input 
+            value={username}
+            id="username"
+            type="text"
+            onChange = {(e) => handleInputChange(e)}
+            className="form-input"
+            placeholder="Username"
+          />
         </div>
         <div className="password">
           <label className="form-label">Password</label><br />
-          <input className="form-input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
+          <input 
+            value={password}
+            id="password"
+            type="password" 
+            onChange = {(e) => handleInputChange(e)} 
+            className="form-input" 
+            placeholder="Password"
+          />
         </div>
         <div className="submit">
-          <button onClick={()=>handleSubmit()} type="submit" className="form-button">Register</button>
+          <button type="submit" className="form-button">Register</button>
         </div>
-      </div>
+      </form>
     </>
   )
 }
+
 /* possiblilité à implémenter
+
   const [confirmPassword,setConfirmPassword] = useState(null);
 
     if(id === "confirmPassword"){
@@ -49,4 +79,5 @@ export default function RegisterCard() {
           <label className="form-label">Confirm Password</label><br />
           <input className="form-input" type="password" id="confirmPassword" value={confirmPassword} onChange = {(e) => handleInputChange(e)} placeholder="Confirm Password"/>
         </div>
+
 */
