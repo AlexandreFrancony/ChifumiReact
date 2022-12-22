@@ -1,9 +1,13 @@
 import React from 'react'
+import './styles.css'
+import RegisterCard from '../../components/RegisterCard/RegisterCard'
+import Header from '../../components/Header/Header'
 
-function Register() {
+export default function Register() {
   return (
-    <div>Register</div>
+    <div>
+      <Header />
+      <RegisterCard />
+    </div>
   )
 }
-
-export default Register
