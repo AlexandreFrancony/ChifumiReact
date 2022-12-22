@@ -1,9 +1,10 @@
 import React from 'react'
+import { useState} from 'react';
 import './styles.css';
 
 function LoginForm() {
-  const [username, setUsername] = React.useState('');
-  const [password, setPassword] = React.useState('');
+  const [username, setUsername] = useState('');
+  const [password, setPassword] = useState('');
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -17,17 +18,22 @@ function LoginForm() {
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    const data = new FormData(event.target);
-    fetch('http://fauques.freeboxos.fr:3000', {
+    fetch('http://fauques.freeboxos.fr:3000/login', {
       method: 'POST',
-      body: data,
-    });
+      headers : {"Content-Type": "application/json"},
+      body: JSON.stringify({
+        username: username,
+        password: password
+      }),
+    })
+    .then(response => response.json())
+    .then(data => console.log(data));;
   };
 
   return (
     <div className="form">
       <div className="title">Login</div>
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={(event) => handleSubmit(event)}>
       <div className="username">
           <label className="form-label">Username</label><br />
           <input className="form-input" type="text"  id="username" value={username} onChange = {(e) => handleInputChange(e)} placeholder="Username"/>
@@ -37,7 +43,7 @@ function LoginForm() {
           <input className="form-input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
         </div>
         <div className="submit">
-          <button onClick={()=>handleSubmit()} type="submit" className="form-button">Register</button>
+          <button type="submit" className="form-button">Login</button>
         </div>
       </form>
     </div>
