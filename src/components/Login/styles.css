@@ -1,3 +1,9 @@
+body{
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
 .form{
     background-color: rgba(112, 162, 255, 0.8);
     border-radius: 5px;
@@ -25,5 +31,16 @@
 }
 
 .submit{
+    text-align: center;
+}
+
+.bout{
+    background-color: #1e90ff;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 10px;
+    font-size: 15px;
+    cursor: pointer;
     text-align: center;
 }

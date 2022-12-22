@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
 import LoginForm from '../../components/Login/LoginForm'
+import LoginButtonToRegister from '../../components/Login/LoginButtonToRegister'
 
 
 export default function Register() {
@@ -9,6 +10,8 @@ export default function Register() {
       <Header />
 
       <LoginForm/>
+
+      <LoginButtonToRegister/>
     </div>
   )
 }
