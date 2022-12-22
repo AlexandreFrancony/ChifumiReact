@@ -1,6 +1,7 @@
 import React from 'react'
 import Header from '../../components/Header/Header'
 import GameList from '../../components/PartyList/GamesList/GameList'
+import CreateGame from '../../components/PartyList/CreateGame/CreateGame'
 import './styles.css';
 
 
@@ -12,6 +13,9 @@ function PartyList() {
 
     {/* Liste des parties */}
     <GameList/>
+
+    {/* Créer une partie */}
+    <CreateGame/>
     </div>
   )
 }

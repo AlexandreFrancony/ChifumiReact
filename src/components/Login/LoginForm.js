@@ -27,11 +27,14 @@ function LoginForm() {
       }),
     })
     .then(response => response.json())
-    .then(data => console.log(data));;
+    .then(data =>{ 
+      console.log(data); 
+      (localStorage.setItem('token', data.token))
+    });
   };
 
   return (
-    <div className="form">
+    <div className="form" autoComplete="off">
       <div className="title">Login</div>
       <form onSubmit={(event) => handleSubmit(event)}>
       <div className="username">
