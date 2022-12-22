@@ -1,12 +1,14 @@
 import './App.css';
-import Header from './components/Header/Header';
+import { Route, Routes } from 'react-router-dom';
 import Register from './pages/Register/Register';
 
 export default function App() {
   return (
-    <div className="App">
-      <Header />
-      <Register />
-    </div>
+    <Routes>
+      <Route path="/" element={<Register />} ></Route>
+      {/* <Route path="/register" element={<Register />} ></Route> /}
+      <Route path="/partylist" element={<PartyList />} ></Route>
+      {/ <Route path="/partydetails" element={<PartyDetails />} ></Route> */}
+    </Routes>
   );
 }
