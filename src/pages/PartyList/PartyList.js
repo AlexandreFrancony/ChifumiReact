@@ -1,8 +1,18 @@
 import React from 'react'
+import Header from '../../components/Header/Header'
+import GameList from '../../components/PartyList/GamesList/GameList'
+import './styles.css';
+
 
 function PartyList() {
   return (
-    <div>PartyList</div>
+    <div>
+    {/* Page Header */}
+    <Header/>
+
+    {/* Liste des parties */}
+    <GameList/>
+    </div>
   )
 }
 
