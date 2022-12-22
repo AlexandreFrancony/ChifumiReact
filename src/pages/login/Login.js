@@ -1,9 +1,14 @@
 import React from 'react'
+import Header from '../../components/Header/Header'
+import LoginForm from '../../components/Login/LoginForm'
 
-function Login() {
+
+export default function Register() {
   return (
-    <div>Login</div>
+    <div>
+      <Header />
+
+      <LoginForm/>
+    </div>
   )
 }
-
-export default Login
