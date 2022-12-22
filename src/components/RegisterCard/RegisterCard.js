@@ -4,7 +4,6 @@ import './styles.css'
 export default function RegisterCard() {
   const [username, setUsername] = useState(null);
   const [password,setPassword] = useState(null);
-  const [confirmPassword,setConfirmPassword] = useState(null);
 
   const handleInputChange = (e) => {
     const {id , value} = e.target;
@@ -14,13 +13,10 @@ export default function RegisterCard() {
     if(id === "password"){
         setPassword(value);
     }
-    if(id === "confirmPassword"){
-        setConfirmPassword(value);
-    }
   }
 
   const handleSubmit  = () => {
-    console.log(username,password,confirmPassword);
+    console.log(username,password);
   }
 
   return (
@@ -35,10 +31,6 @@ export default function RegisterCard() {
           <label className="form-label">Password</label><br />
           <input className="form-input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
         </div>
-        <div className="confirmPassword">
-          <label className="form-label">Confirm Password</label><br />
-          <input className="form-input" type="password" id="confirmPassword" value={confirmPassword} onChange = {(e) => handleInputChange(e)} placeholder="Confirm Password"/>
-        </div>
         <div className="submit">
           <button onClick={()=>handleSubmit()} type="submit" className="form-button">Register</button>
         </div>
@@ -46,3 +38,15 @@ export default function RegisterCard() {
     </>
   )
 }
+/* possiblilité à implémenter
+  const [confirmPassword,setConfirmPassword] = useState(null);
+
+    if(id === "confirmPassword"){
+        setConfirmPassword(value);
+    }
+
+        <div className="confirmPassword">
+          <label className="form-label">Confirm Password</label><br />
+          <input className="form-input" type="password" id="confirmPassword" value={confirmPassword} onChange = {(e) => handleInputChange(e)} placeholder="Confirm Password"/>
+        </div>
+*/
