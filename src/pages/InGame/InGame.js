@@ -5,7 +5,8 @@ import InGameTiles from '../../components/InGame/InGameTiles'
 export default function InGame() {
   return (
     <div>
-      <Header />
+        <Header />
+        <InGameTiles />
     </div>
   )
 }

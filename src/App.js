@@ -3,6 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import PartyList from './pages/PartyList/PartyList';
+import InGame from './pages/InGame/InGame';
 // import PartyDetails from './pages/PartyDetails/PartyDetails';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
       <Route path="/" element={<Login />} ></Route>
       <Route path="/register" element={<Register />} ></Route>
       <Route path="/partylist" element={<PartyList />} ></Route>
+      <Route path="/matches/test" element={<InGame />} ></Route>
       {/* <Route path="/partydetails" element={<PartyDetails />} ></Route> */}
     </Routes>
   );

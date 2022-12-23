@@ -8,7 +8,7 @@ export default function LoginButtonToRegister() {
     <>
       <div>
         <Link to='/register'>
-            <button className='bout'>Pas encore de compte?</button>
+            <button className='bout'>Don't have an account yet?</button>
         </Link>
       </div>
     </>

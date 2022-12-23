@@ -8,7 +8,7 @@ export default function LoginButtonToRegister() {
     <>
       <div>
         <Link to='/'>
-            <button className='bout'>Vous avez déjà un compte ?</button>
+            <button className='bout'>Already have an account ?</button>
         </Link>
       </div>
     </>
