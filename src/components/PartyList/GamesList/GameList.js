@@ -28,15 +28,20 @@ function GameList() {
         return <div className="Nomacth">No match for now... Create a match !</div>;
     } else {
         return (
-            <div className="games">
-                <h2>Games</h2>
-                <ul>
-                    {games.map(game => (
-                        <li key={game._id}>
-                            {game._id}
-                        </li>
-                    ))}
-                </ul>
+            <div className="game-wrap">
+                {games.map(game => (
+                    <div className="game" key={game._id}>
+                        <div className="game-id">
+                            <p>Game ID: {game._id}</p>
+                        </div>
+                        <div className="game-players">
+                            <p>Player 1: {game.user1.username}</p>
+                        </div>
+                        <div className="game-players">
+                            <p>Player 2: {game.user2 ? game.user2.username : "Pas de deuxième joueur"}</p>
+                        </div>
+                    </div>
+                ))}
             </div>
         );
     }

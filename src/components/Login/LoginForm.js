@@ -1,5 +1,6 @@
 import React from 'react'
 import { useState} from 'react';
+import { Link } from "react-router-dom";
 import './styles.css';
 
 function LoginForm() {
@@ -36,7 +37,7 @@ function LoginForm() {
   return (
     <div className="form" autoComplete="off">
       <div className="title">Login</div>
-      <form onSubmit={(event) => handleSubmit(event)}>
+      <form>
       <div className="username">
           <label className="form-label">Username</label><br />
           <input className="form-input" type="text"  id="username" value={username} onChange = {(e) => handleInputChange(e)} placeholder="Username"/>
@@ -46,7 +47,10 @@ function LoginForm() {
           <input className="form-input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
         </div>
         <div className="submit">
-          <button type="submit" className="form-button">Login</button>
+          <button className="form-button" onClick={(event) => handleSubmit(event)}>Login</button>
+          <Link to='/partylist'>
+            <button className="form-button">Go !</button>
+        </Link>
         </div>
       </form>
     </div>
