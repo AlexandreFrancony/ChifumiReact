@@ -1,5 +1,6 @@
 import React from 'react'
 import {useState, useEffect} from 'react'
+import Button from '@mui/material/Button';
 import {Link} from 'react-router-dom'
 import './styles.css'
 
@@ -24,9 +25,7 @@ export default function Header() {
       </div>
       {isLogged ? (
         <Link to='/'>
-        <button className="logout-button" onClick={handleLogout}>
-          Logout
-        </button>
+        <Button variant="outlined" color="error" onClick={handleLogout}>Log out</Button>
         </Link>
       ) : (
         <></>

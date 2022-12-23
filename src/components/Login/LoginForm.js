@@ -1,11 +1,12 @@
 import React from 'react'
 import { useState} from 'react';
-import { Link } from "react-router-dom";
+import { useNavigate } from 'react-router-dom';
 import './styles.css';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+  const navigate = useNavigate();
 
   const handleInputChange = (e) => {
     const { id, value } = e.target;
@@ -31,13 +32,14 @@ function LoginForm() {
     .then(data =>{ 
       console.log(data); 
       (localStorage.setItem('token', data.token))
+      navigate('/partylist')
     });
   };
 
   return (
     <div className="form" autoComplete="off">
       <div className="title">Login</div>
-      <form>
+      <form onSubmit={handleSubmit}>
       <div className="username">
           <label className="form-label">Username</label><br />
           <input className="form-input" type="text"  id="username" value={username} onChange = {(e) => handleInputChange(e)} placeholder="Username"/>
@@ -47,10 +49,7 @@ function LoginForm() {
           <input className="form-input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
         </div>
         <div className="submit">
-          <button className="form-button" onClick={(event) => handleSubmit(event)}>Login</button>
-          <Link to='/partylist'>
-            <button className="form-button">Go !</button>
-        </Link>
+          <button className="form-button" type='Submit'>Login</button>
         </div>
       </form>
     </div>
