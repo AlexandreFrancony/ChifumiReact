@@ -36,19 +36,19 @@ export default function InGameTiles() {
             <div className="tiles">
                 <div className="Card" onClick={HandleClick}>
                     <h3>Pierre</h3>
-                    <div>
+                    <div className='icons'>
                         👊
                     </div>
                 </div>
                 <div className="Card">
                     <h3>Feuille</h3>
-                    <div>
+                    <div className='icons'>
                         🖐
                     </div>
                 </div>
                 <div className="Card">
                     <h3>Ciseau</h3>
-                    <div>
+                    <div className='icons'>
                         ✌️
                     </div>
                 </div>
