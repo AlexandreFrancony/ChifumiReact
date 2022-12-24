@@ -120,7 +120,6 @@ function GameList() {
               }}
             >
               {images.map((image) => (
-
                 <ImageButton
                   focusRipple
                   key={image.title}
@@ -128,7 +127,7 @@ function GameList() {
                     width: image.width,
                   }}
                 >
-                    <Link/>
+                  <Link to={`/partylist/${game._id}`}>
                   <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
                   <ImageBackdrop className="MuiImageBackdrop-root" />
                   <Image>
@@ -147,6 +146,7 @@ function GameList() {
                       <ImageMarked className="MuiImageMarked-root" />
                     </Typography>
                   </Image>
+                  </Link>
                 </ImageButton>
               ))}
             </Box>
@@ -158,7 +158,10 @@ function GameList() {
             </div>
             <div className="game-players">
               <p>
-                Player 2: {game.user2 ? game.user2.username : "Waiting for another player..."}
+                Player 2:{" "}
+                {game.user2
+                  ? game.user2.username
+                  : "Waiting for another player..."}
               </p>
             </div>
           </div>
