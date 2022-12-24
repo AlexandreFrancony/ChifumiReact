@@ -11,31 +11,47 @@ export default function InGameTiles() {
     const [turnid, setTurnid] = useState("");
     const [choice, setChoice] = useState("");
 
-    /*setUsername1(localStorage.getItem('username1'));
-    setUsername2(localStorage.getItem('username2'));
-    setMatchid(localStorage.getItem('matchid'));
-    setTurnid(0);*/
+    //récupérer les données du match
+    useEffect(() => {
+        getMatchData();
+        setMatchid(getMatchId());
+        setTurnid(getTurnId());
+    }, [])
 
-    //fonction qui permet de récupérer l'idturn de la partie dans l'url selon cet exemple : http://localhost:3000/matches/:idmatch/turns/:idTurn
+    function getMatchData() {
+        
+        const requestOptions = {
+            method: 'GET',
+            headers: { 'Content-Type': 'application/json' ,
+                        Authorization: 'Bearer ' + localStorage.getItem('token')}
+        };
+        fetch('http://fauques.freeboxos.fr:3000/matches/'+matchid, requestOptions)
+            .then(response => response.json())
+            .then(data => {
+                console.log(data);
+                setUsername1(data.user1.username);
+                setUsername2(data.user2.username);
+            });
+    }
+
+
     function getTurnId() {
         let url = window.location.href;
-        let id = url.substring(url.lastIndexOf('/') + 1);
+        let url_split = url.split('/');
+        let id = url_split[url_split.length-1];
         console.log('turnid:'+id);
         return id;
     }
 
-    //fonction qui permet de récupérer l'idmatch(int) de la partie dans l'url selon cet exemple : http://localhost:3000/matches/:idmatch/turns/:idTurn
     function getMatchId() {
         let url = window.location.href;
-        let id = url.substring(url.lastIndexOf('/') - 1, url.lastIndexOf('/'));
+        //split url selon le caractère '/'
+        let url_split = url.split('/');
+        //récupérer l'idmatch dans l'url (avant dernier élément du tableau)
+        let id = url_split[url_split.length-3];
         console.log('matchid:'+id);
         return id;
     }
-
-    useEffect(() => {
-        setMatchid(getMatchId());
-        setTurnid(getTurnId());
-    }, []) 
 
     function HandleClick (e) {
         switch (e) {
@@ -79,6 +95,7 @@ export default function InGameTiles() {
         <div className="Wrapper">
             <h2>{username1 + ' vs ' + username2}</h2>
             <h3>{'ID of the current match : ' + matchid}</h3>
+            <h3>{'ID of the current turn : ' + turnid}</h3>
             <div className="tiles">
                 <div className="Card">
                     <h3 className='icons'>Rock</h3>
