@@ -3,16 +3,15 @@ import {useState, useEffect} from 'react';
 import './styles.css';
 import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
+import { Link } from 'react-router-dom';
 
 export default function InGameTiles() {
 
-    const [username1, setUsername1] = useState("");
-    const [username2, setUsername2] = useState("");
-    const [matchid, setMatchid] = useState("");
     const [turnid, setTurnid] = useState("");
     const [choice, setChoice] = useState("");
 
-/*    const [gamedetail, setGameDetail] = useState({});
+    const [intel, setIntel] = useState({});
+    const [isLoaded, setIsLoaded] = useState(false);
   
     const { id } = useParams();
   
@@ -27,45 +26,11 @@ export default function InGameTiles() {
         .then((response) => response.json())
         .then((data) => {
           console.log(data);
-          setGameDetail(data);
+          setIsLoaded(true);
+          setIntel(data);
+          setTurnid(1);
         });
-    }, [id]);*/
-
-    useEffect(() => {
-        setMatchid(getMatchId());
-        setTurnid(getTurnId());
-        getMatchData();        
-    }, []);
-
-    function getMatchData() {
-    
-        const requestOptions = {
-            method: 'GET',
-            headers: { 'Content-Type': 'application/json' ,
-                        Authorization: 'Bearer ' + localStorage.getItem('token')}
-        };
-        fetch('http://fauques.freeboxos.fr:3000/matches/'+matchid, requestOptions)
-            .then(response => response.json())
-            .then(data => {
-                console.log(data);
-                //setUsername1(data.user1.username);
-                //setUsername2(data.user2.username);
-            });
-    }
-
-    function getTurnId() {
-        let url = window.location.href;
-        let url_split = url.split('/');
-        let id = url_split[url_split.length-1];
-        return id;
-    }
-
-    function getMatchId() {
-        let url = window.location.href;
-        let url_split = url.split('/');
-        let id = url_split[url_split.length-3];
-        return id;
-    }
+    }, [id]);
 
     function HandleClick (e) {
         switch (e) {
@@ -87,14 +52,31 @@ export default function InGameTiles() {
     function Request() { 
         const requestOptions = {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
+        headers: {
+            "Content-Type": "application/json",
+            Authorization: "Bearer " + localStorage.getItem("token"),
+          },
         body: JSON.stringify({'move': choice})
     };
-    fetch('http://fauques.freeboxos.fr:3000/matches/'+matchid+'/turns/'+turnid, requestOptions)
+    fetch('http://fauques.freeboxos.fr:3000/matches/'+intel._id+'/turns/'+turnid, requestOptions)
         .then(response => response.json())
         .then(data => {
             console.log(data);
-            setTurnid(data.turnid)
+            let incr = turnid+1;
+            setTurnid(incr);
+            //incrémente le turnid pour la prochaine requête (si le match n'est pas fini)
+            if (data.winner === null) {
+                setTurnid(turnid + 1);
+            }
+
+            //affiche le gagnant
+            if (data.winner === 1) {
+                alert(intel.user1.username + ' wins !');
+            } else if (data.winner === 2) {
+                alert(intel.user2.username + ' wins !');
+            } else if (data.winner === 0) {
+                alert('Draw !');
+            }
         });
         console.log(requestOptions)
     }
@@ -102,37 +84,50 @@ export default function InGameTiles() {
     useEffect(() => {
         if (choice) {
             Request()
-        }
+        }// eslint-disable-next-line react-hooks/exhaustive-deps
     }, [choice])
 
-    return(
-        <div className="Wrapper">
-            <h2>{username1 + ' vs ' + username2}</h2>
-            <h3>{'ID of the current match : ' + matchid}</h3>
-            <h3>{'Turn n°' + turnid}</h3>
-            <div className="tiles">
-                <div className="Card">
-                    <h3 className='icons'>Rock</h3>
-                    <div className='icons'>
-                        👊
+    if (!isLoaded) {
+        return ( 
+          <div>
+            Error loading ther game, return to the Game List.
+            <Link to="/partylist">
+              <Button variant="outlined" color="error">
+                Return to GameList
+              </Button>
+            </Link>
+          </div>
+        );
+    } else {
+        return (
+            <div className="Wrapper">
+                <h2>{intel.user1.username + ' vs ' + intel.user2.username}</h2>
+                <h3>{'ID of the current match : ' + intel._id}</h3>
+                <h3>{'Turn n°' + turnid}</h3>
+                <div className="tiles">
+                    <div className="Card">
+                        <h3 className='icons'>Rock</h3>
+                        <div className='icons'>
+                            👊
+                        </div>
+                        <Button variant="text" onClick={(e) => HandleClick('rock')}>Select</Button>
                     </div>
-                    <Button variant="text" onClick={(e) => HandleClick('rock')}>Select</Button>
-                </div>
-                <div className="Card">
-                    <h3 className='icons'>Paper</h3>
-                    <div className='icons'>
-                        🖐
+                    <div className="Card">
+                        <h3 className='icons'>Paper</h3>
+                        <div className='icons'>
+                            🖐
+                        </div>
+                        <Button variant="text" onClick={(e) => HandleClick('paper')}>Select</Button>
                     </div>
-                    <Button variant="text" onClick={(e) => HandleClick('paper')}>Select</Button>
-                </div>
-                <div className="Card">
-                    <h3 className='icons'>Scissors</h3>
-                    <div className='icons'>
-                        ✌️
+                    <div className="Card">
+                        <h3 className='icons'>Scissors</h3>
+                        <div className='icons'>
+                            ✌️
+                        </div>
+                        <Button variant="text" onClick={(e) => HandleClick('scissors')}>Select</Button>
                     </div>
-                    <Button variant="text" onClick={(e) => HandleClick('scissors')}>Select</Button>
                 </div>
             </div>
-        </div>
-    );
+            );
+        }
 }
