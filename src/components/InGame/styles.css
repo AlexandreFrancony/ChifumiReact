@@ -1,5 +1,5 @@
 .Card{
-    width: 10%;
+    width: 15%;
     height: 100%;
     background-color: #fff;
     border-radius: 10px;
@@ -18,9 +18,13 @@
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
+    align-items: center;
     margin-top: 20px;
 }
 
 .icons{
     font-size: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
