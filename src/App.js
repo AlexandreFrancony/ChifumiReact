@@ -12,7 +12,7 @@ function App() {
       <Route path="/" element={<Login />} ></Route>
       <Route path="/register" element={<Register />} ></Route>
       <Route path="/partylist" element={<PartyList />} ></Route>
-      <Route path="/partylist/:_id" element={<PartyDetails />} ></Route>
+      <Route path="/partylist/:id" element={<PartyDetails />} ></Route>
       <Route path="/matches/test" element={<InGame />} ></Route>
     </Routes>
   );

@@ -100,7 +100,7 @@ function GameList() {
       .then((data) => {
         console.log(data);
         setIsLoaded(true);
-        setGames(data);
+        setGames(data.reverse());
       });
   }, []);
 
@@ -150,15 +150,12 @@ function GameList() {
                 </ImageButton>
               ))}
             </Box>
-            <div className="game-id">
-              <p>Game ID: {game._id}</p>
-            </div>
             <div className="game-players">
               <p>Player 1: {game.user1.username}</p>
             </div>
             <div className="game-players">
               <p>
-                Player 2:{" "}
+                Player 2:
                 {game.user2
                   ? game.user2.username
                   : "Waiting for another player..."}

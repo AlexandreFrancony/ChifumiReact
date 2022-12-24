@@ -24,7 +24,7 @@ export default function Header() {
       <h1>Chi-Fou-Mi</h1>
       </div>
       {isLogged ? (
-        <Link to='/'>
+        <Link to='/' className="link">
         <Button variant="outlined" color="error" onClick={handleLogout}>Log out</Button>
         </Link>
       ) : (

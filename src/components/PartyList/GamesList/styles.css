@@ -28,14 +28,9 @@
     /* background-color: black; */
   }
 
-.game-id {
-  /* color: white; */
-  padding-top: 3rem;
-  padding-bottom: 3rem;
-}
-
 .game-players {
   /* color: white; */
   padding-bottom: 2rem;
+  padding-top: 2rem;
 }
 

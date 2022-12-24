@@ -1,15 +1,18 @@
 import React from "react";
 import { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import Button from "@mui/material/Button";
+import { GiBattleAxe } from "react-icons/gi";
 import "./styles.css";
 
 function GameDetails() {
-  const [games, setGames] = useState([]);
+  const [gamedetail, setGameDetail] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const { id } = useParams();
+
   useEffect(() => {
-    fetch("http://fauques.freeboxos.fr:3000/matches", {
+    fetch(`http://fauques.freeboxos.fr:3000/matches/${id}`, {
       method: "GET",
       headers: {
         "Content-Type": "application/json",
@@ -20,9 +23,9 @@ function GameDetails() {
       .then((data) => {
         console.log(data);
         setIsLoaded(true);
-        setGames(data);
+        setGameDetail(data);
       });
-  }, []);
+  }, [id]);
 
   if (!isLoaded) {
     return (
@@ -37,20 +40,36 @@ function GameDetails() {
     );
   } else {
     return (
-      <div>
-        {games.map((game) => (
-          <div className="game" key={game._id}>
-            <div className="game-id">
-              <p>Game ID: {game._id}</p>
-            </div>
-            <div className="game-players">
-              <p>Player 1: {game.user1.username}</p>
-            </div>
-            <div className="game-players">
-              <p>Player 2: {game.user2.username}</p>
-            </div>
-          </div>
-        ))}
+      <div className="game-details">
+        <div className="game-id">
+          <p>Game ID: {gamedetail._id}</p>
+        </div>
+        <div className="game-players">
+          <p>Player 1: {gamedetail.user1.username}</p>
+        </div>
+        <h1>
+          <GiBattleAxe />
+        </h1>
+        <div className="game-players">
+          <p>
+            Player 2:
+            {gamedetail.user2
+              ? gamedetail.user2.username
+              : "Waiting for another player..."}
+          </p>
+        </div>
+        <div className="go-to-match-button">
+          <Link to={`/matches/${gamedetail._id}`} className="link">
+            <Button variant="contained" disableElevation color="success">
+              Go to the match !
+            </Button>
+          </Link>
+        </div>
+        <div className="return-to-gamelist-button">
+          <Link to="/partylist" className="link">
+            <Button variant="contained">Return to GameList</Button>
+          </Link>
+        </div>
       </div>
     );
   }
