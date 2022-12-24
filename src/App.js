@@ -4,7 +4,7 @@ import Login from './pages/Login/Login';
 import Register from './pages/Register/Register';
 import PartyList from './pages/PartyList/PartyList';
 import InGame from './pages/InGame/InGame';
-// import PartyDetails from './pages/PartyDetails/PartyDetails';
+import PartyDetails from './pages/PartyDetails/PartyDetails';
 
 function App() {
   return (
@@ -12,8 +12,8 @@ function App() {
       <Route path="/" element={<Login />} ></Route>
       <Route path="/register" element={<Register />} ></Route>
       <Route path="/partylist" element={<PartyList />} ></Route>
+      <Route path="/partylist/:_id" element={<PartyDetails />} ></Route>
       <Route path="/matches/test" element={<InGame />} ></Route>
-      {/* <Route path="/partydetails" element={<PartyDetails />} ></Route> */}
     </Routes>
   );
 }
