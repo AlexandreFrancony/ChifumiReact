@@ -1,6 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react';
 import './styles.css';
+import { useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 
 export default function InGameTiles() {
@@ -11,15 +12,33 @@ export default function InGameTiles() {
     const [turnid, setTurnid] = useState("");
     const [choice, setChoice] = useState("");
 
-    //récupérer les données du match
+/*    const [gamedetail, setGameDetail] = useState({});
+  
+    const { id } = useParams();
+  
     useEffect(() => {
-        getMatchData();
+      fetch(`http://fauques.freeboxos.fr:3000/matches/${id}`, {
+        method: "GET",
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      })
+        .then((response) => response.json())
+        .then((data) => {
+          console.log(data);
+          setGameDetail(data);
+        });
+    }, [id]);*/
+
+    useEffect(() => {
         setMatchid(getMatchId());
         setTurnid(getTurnId());
-    }, [])
+        getMatchData();        
+    }, []);
 
     function getMatchData() {
-        
+    
         const requestOptions = {
             method: 'GET',
             headers: { 'Content-Type': 'application/json' ,
@@ -29,27 +48,22 @@ export default function InGameTiles() {
             .then(response => response.json())
             .then(data => {
                 console.log(data);
-                setUsername1(data.user1.username);
-                setUsername2(data.user2.username);
+                //setUsername1(data.user1.username);
+                //setUsername2(data.user2.username);
             });
     }
-
 
     function getTurnId() {
         let url = window.location.href;
         let url_split = url.split('/');
         let id = url_split[url_split.length-1];
-        console.log('turnid:'+id);
         return id;
     }
 
     function getMatchId() {
         let url = window.location.href;
-        //split url selon le caractère '/'
         let url_split = url.split('/');
-        //récupérer l'idmatch dans l'url (avant dernier élément du tableau)
         let id = url_split[url_split.length-3];
-        console.log('matchid:'+id);
         return id;
     }
 
@@ -95,7 +109,7 @@ export default function InGameTiles() {
         <div className="Wrapper">
             <h2>{username1 + ' vs ' + username2}</h2>
             <h3>{'ID of the current match : ' + matchid}</h3>
-            <h3>{'ID of the current turn : ' + turnid}</h3>
+            <h3>{'Turn n°' + turnid}</h3>
             <div className="tiles">
                 <div className="Card">
                     <h3 className='icons'>Rock</h3>
