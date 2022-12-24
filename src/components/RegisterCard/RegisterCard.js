@@ -1,10 +1,12 @@
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles.css'
 
 export default function RegisterCard() {
 
   const [username, setUsername] = useState("");
   const [password,setPassword] = useState("");
+  const navigate = useNavigate();
 
   function handleInputChange(e) {
     const {id , value} = e.target;
@@ -30,7 +32,11 @@ export default function RegisterCard() {
   };
   fetch('http://fauques.freeboxos.fr:3000/register', requestOptions)
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => {
+        console.log(data)
+        navigate('/')
+      });
+      
   };
 
   return (

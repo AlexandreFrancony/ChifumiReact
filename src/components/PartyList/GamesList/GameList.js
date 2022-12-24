@@ -5,6 +5,7 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
+import "./Chi-fu-mi-a2.png";
 import "./styles.css";
 
 function GameList() {
@@ -13,9 +14,9 @@ function GameList() {
 
   const images = [
     {
-      url: "./5263-rafiq-of-the-many.jpg",
-      title: "Game ready",
-      width: "100%",
+      url: '/Chi-fu-mi-a2.png',
+      title: 'Game ready',
+      width: '100%',
     },
     // {
     //     url: "./Chi-fu-mi-alone.png",
