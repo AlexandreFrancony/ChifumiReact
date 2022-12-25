@@ -1,5 +1,6 @@
 import React from 'react'
 import './styles.css';
+import Button from '@mui/material/Button';
 
 export default function CreateGame() {
 
@@ -8,7 +9,7 @@ export default function CreateGame() {
     const requestOptions = {
       method: 'POST',
       headers: { 'Content-Type': 'application/json',
-      'Authorization' : 'Bearer ' + localStorage.getItem('token') 
+      'Authorization' : 'Bearer ' + localStorage.getItem('token')
     },
   };
   fetch('http://fauques.freeboxos.fr:3000/matches', requestOptions)
@@ -19,7 +20,7 @@ export default function CreateGame() {
   return (
     <>
       <div className="create-game">
-        <button className="create-game-button" onClick={handleClick}>Créer une partie</button>
+        <Button className="create-game-button" onClick={handleClick} variant="outlined">Créer une partie</Button>
       </div>
     </>
   )

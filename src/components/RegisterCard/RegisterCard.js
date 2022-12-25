@@ -1,10 +1,14 @@
+import { TextField } from '@mui/material';
 import React, {useState} from 'react';
+import { useNavigate } from 'react-router-dom';
 import './styles.css'
+import Button from '@mui/material/Button';
 
 export default function RegisterCard() {
 
   const [username, setUsername] = useState("");
   const [password,setPassword] = useState("");
+  const navigate = useNavigate();
 
   function handleInputChange(e) {
     const {id , value} = e.target;
@@ -30,7 +34,11 @@ export default function RegisterCard() {
   };
   fetch('http://fauques.freeboxos.fr:3000/register', requestOptions)
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => {
+        console.log(data)
+        navigate('/')
+      });
+      
   };
 
   return (
@@ -39,7 +47,7 @@ export default function RegisterCard() {
       <div className="title">Registration Form</div>
         <div className="username">
           <label className="form-label">Username</label><br />
-          <input 
+          <TextField
             value={username}
             id="username"
             type="text"
@@ -48,19 +56,21 @@ export default function RegisterCard() {
             placeholder="Username"
           />
         </div>
+        <br />
         <div className="password">
           <label className="form-label">Password</label><br />
-          <input 
+          <TextField
             value={password}
             id="password"
-            type="password" 
-            onChange = {(e) => handleInputChange(e)} 
-            className="form-input" 
+            type="password"
+            onChange = {(e) => handleInputChange(e)}
+            className="form-input"
             placeholder="Password"
           />
         </div>
+        <br />
         <div className="submit">
-          <button type="submit" className="form-button">Register</button>
+          <Button variant="contained" type="submit" className="form-button">Register</Button>
         </div>
       </form>
     </>
