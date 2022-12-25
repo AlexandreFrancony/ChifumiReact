@@ -37,7 +37,7 @@ export default function InGameTiles() {
       console.log(e);
       const data = JSON.parse(e.data);
       console.log(data);
-      switch (data){
+      switch (data.type){
         case "PLAYER1_MOVED":
           setP1move(data);
           break;
@@ -46,12 +46,14 @@ export default function InGameTiles() {
           break;
         case "TURN_ENDED":
           setTended(data);
+          let i = turnid + 1;
+          setTurnid(i);
           break;
         case "MATCH_ENDED":
           setMended(data);
           break;
         case "NEW_TURN":
-          setTurnid(data.payload.turnId);
+          
           break;
         default:
           console.log("error in switch eventSource");
