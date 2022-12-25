@@ -5,7 +5,8 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
-import "./Chi-fu-mi-a2.png";
+import Chifumia2 from "./Chi-fu-mi-a2.png";
+import Chifumialone from "./Chi-fu-mi-alone.png";
 import "./styles.css";
 
 function GameList() {
@@ -14,7 +15,7 @@ function GameList() {
 
   const images = [
     {
-      url: "/Chi-fu-mi-a2.png",
+      url: "./Chi-fu-mi-a2.png",
       title: "Game ready",
       width: "100%",
     },
@@ -128,18 +129,17 @@ function GameList() {
                     width: image.width,
                   }}
                 >
-                  {/* if there is a user2 in the game, the button will be enabled, else it will not  */}
                   {game.user2 ? (
                     <Link to={`/partylist/${game._id}`}>
                       <ImageSrc
-                        style={{ backgroundImage: `url(${image.url})` }}
+                        style={{ backgroundImage: `url(${Chifumia2})` }}
                       />
                       <ImageBackdrop className="MuiImageBackdrop-root" />
                       <Image>
                         <Typography
                           component="span"
                           variant="subtitle1"
-                          color="inherit"
+                          color="grey.800"
                           sx={{
                             position: "relative",
                             p: 4,
@@ -147,16 +147,8 @@ function GameList() {
                             pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
                           }}
                         >
-                          <div>
-                            {game.user2 ? (
-                              <div className="game-players">
-                                <p>Game Ready</p>
-                              </div>
-                            ) : (
-                              <div className="game-players">
-                                <p>Game not ready</p>
-                              </div>
-                            )}
+                          <div className="game-players">
+                            <p>{image.title}</p>
                           </div>
                           <ImageMarked className="MuiImageMarked-root" />
                         </Typography>
@@ -165,14 +157,14 @@ function GameList() {
                   ) : (
                     <Link to={`/partylist`}>
                       <ImageSrc
-                        style={{ backgroundImage: `url(${image.url})` }}
+                        style={{ backgroundImage: `url(${Chifumialone})` }}
                       />
                       <ImageBackdrop className="MuiImageBackdrop-root" />
                       <Image>
                         <Typography
                           component="span"
                           variant="subtitle1"
-                          color="inherit"
+                          color="error"
                           sx={{
                             position: "relative",
                             p: 4,
@@ -180,16 +172,8 @@ function GameList() {
                             pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
                           }}
                         >
-                          <div>
-                            {game.user2 ? (
-                              <div className="game-players">
-                                <p>Game Ready</p>
-                              </div>
-                            ) : (
-                              <div className="game-players">
-                                <p>Game not ready</p>
-                              </div>
-                            )}
+                          <div className="game-players">
+                            <p>Game not ready</p>
                           </div>
                           <ImageMarked className="MuiImageMarked-root" />
                         </Typography>
