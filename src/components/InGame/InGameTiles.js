@@ -116,7 +116,7 @@ export default function InGameTiles() {
         console.log(data);
         setChoice("");
         if (mended.type === "MATCH_ENDED") {
-          navigate("/partylist");
+          navigate("/partylist" + intel._id);
         }
       })
       .catch((error) => {
