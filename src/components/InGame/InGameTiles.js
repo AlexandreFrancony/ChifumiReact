@@ -1,7 +1,7 @@
 import React from 'react'
 import {useState, useEffect} from 'react';
 import './styles.css';
-import { useParams } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
 import { Button } from '@mui/material';
 import { Link } from 'react-router-dom';
 
@@ -12,6 +12,8 @@ export default function InGameTiles() {
 
     const [intel, setIntel] = useState({});
     const [isLoaded, setIsLoaded] = useState(false);
+
+    const navigate = useNavigate();
   
     const { id } = useParams();
   
@@ -54,7 +56,8 @@ export default function InGameTiles() {
         method: 'POST',
         headers: {
             "Content-Type": "application/json",
-            Authorization: "Bearer " + localStorage.getItem("token"),
+            'Accept': 'application/json',
+            "Authorization": "Bearer " + localStorage.getItem("token"),
           },
         body: JSON.stringify({'move': choice})
     };
@@ -64,21 +67,15 @@ export default function InGameTiles() {
             console.log(data);
             let incr = turnid+1;
             setTurnid(incr);
-            //incrémente le turnid pour la prochaine requête (si le match n'est pas fini)
-            if (data.winner === null) {
-                setTurnid(turnid + 1);
+            setChoice("");
+            if (data.match==='Match already finished'){
+                navigate("/partylist");
             }
-
-            //affiche le gagnant
-            if (data.winner === 1) {
-                alert(intel.user1.username + ' wins !');
-            } else if (data.winner === 2) {
-                alert(intel.user2.username + ' wins !');
-            } else if (data.winner === 0) {
-                alert('Draw !');
-            }
+        }).catch(error => {
+            console.log(error);
         });
         console.log(requestOptions)
+        
     }
 
     useEffect(() => {
