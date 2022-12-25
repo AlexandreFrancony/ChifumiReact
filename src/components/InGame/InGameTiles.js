@@ -46,8 +46,8 @@ export default function InGameTiles() {
           break;
         case "TURN_ENDED":
           setTended(data);
-          let i = turnid + 1;
-          setTurnid(i);
+          setTurnid(data.payload.newTurnId)
+          setChoice("");
           break;
         case "MATCH_ENDED":
           setMended(data);
@@ -83,11 +83,6 @@ export default function InGameTiles() {
   }, [id]);
 
   function HandleClick(c) {
-    //TODO : gestion du click sur les boutons selon l'utilisateur et le tour ainsi que le choix de l'adversaire
-
-
-
-
     switch (c) {
       case "rock":
         setChoice("rock");
