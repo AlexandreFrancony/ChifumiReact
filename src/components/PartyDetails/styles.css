@@ -24,5 +24,9 @@
 }
 
 .go-to-match-button{
+    padding-top: 3.5rem;
+}
+
+.winner{
     padding-top: 2rem;
 }
