@@ -9,6 +9,7 @@
 
 body{
   font-family: 'Manrope', sans-serif;
+  background-color: beige;
 }
 
 button,
@@ -26,3 +27,4 @@ input{
 .link {
   text-decoration: none;
 }
+
