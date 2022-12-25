@@ -66,21 +66,20 @@ function GameDetails() {
               <p>
                 {" "}
                 Waiting for a winner...
-                <div className="return-to-gamelist-button">
-                  <Link to="/partylist" className="link">
-                    <Button variant="contained">Return to GameList</Button>
+                <div className="go-to-match-button">
+                  <Link to={`/matches/${gamedetail._id}`} className="link">
+                    <Button
+                      variant="contained"
+                      disableElevation
+                      color="success"
+                    >
+                      Go to the match !
+                    </Button>
                   </Link>
                 </div>
               </p>
             )}
           </div>
-        </div>
-        <div className="go-to-match-button">
-          <Link to={`/matches/${gamedetail._id}`} className="link">
-            <Button variant="contained" disableElevation color="success">
-              Go to the match !
-            </Button>
-          </Link>
         </div>
         <div className="return-to-gamelist-button">
           <Link to="/partylist" className="link">
