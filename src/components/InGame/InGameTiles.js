@@ -176,26 +176,13 @@ export default function InGameTiles() {
         </Link>
         </div>
         <div className="winner">
-          {p1move.type === "PLAYER1_MOVED" && p2move.type === "PLAYER2_MOVED" ? (
-            <h2>
-              {intel.user1.username +
-                " played " +
-                p1move.payload.move +
-                " and " +
-                intel.user2.username +
-                " played " +
-                p2move.payload.move}
-            </h2>
-          ) : (
-            <h2>Waiting for the other player to play</h2>
-          )}
           {tended.type === "TURN_ENDED" ? (
             <h2>
-              {tended.payload.winner === "DRAW" ? (
+              {tended.payload.winner === "draw" ? (
                 <h2>It's a draw !</h2>
-              ) : tended.payload.winner === "PLAYER1" ? (
+              ) : tended.payload.winner === "user1" ? (
                 <h2>{intel.user1.username + " won this turn !"}</h2>
-              ) : tended.payload.winner === "PLAYER2" ? (
+              ) : tended.payload.winner === "user2" ? (
                 <h2>{intel.user2.username + " won this turn !"}</h2>
               ) : (
                 <h2>error in switch tended</h2>
