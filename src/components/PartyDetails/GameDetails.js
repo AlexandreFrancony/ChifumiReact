@@ -59,7 +59,7 @@ function GameDetails() {
           </p>
           <br />
           <p>
-            Winner: {gamedetail.winner ? gamedetail.winner.username : "None"}
+            Winner: {gamedetail.winner ? gamedetail.winner.username : "To be determined..."}
           </p>
         </div>
         <div className="go-to-match-button">
