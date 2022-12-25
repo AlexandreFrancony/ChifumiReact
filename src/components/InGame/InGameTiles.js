@@ -50,6 +50,9 @@ export default function InGameTiles() {
         case "MATCH_ENDED":
           setMended(data);
           break;
+        case "NEW_TURN":
+          setTurnid(data.payload.turnId);
+          break;
         default:
           console.log("error in switch eventSource");
           break;
@@ -59,8 +62,6 @@ export default function InGameTiles() {
       eventSource.close();
     };
   }, [id]);
-
-
 
   useEffect(() => {
     fetch(`http://fauques.freeboxos.fr:3000/matches/${id}`, {
@@ -80,8 +81,8 @@ export default function InGameTiles() {
   }, [id]);
 
   function HandleClick(c) {
-    //gestion du click sur les boutons selon l'utilisateur et le tour ainsi que le choix de l'adversaire
-    
+    //TODO : gestion du click sur les boutons selon l'utilisateur et le tour ainsi que le choix de l'adversaire
+
 
 
 
@@ -112,26 +113,18 @@ export default function InGameTiles() {
       body: JSON.stringify({ move: choice }),
     };
     fetch(
-      "http://fauques.freeboxos.fr:3000/matches/" +
-        intel._id +
-        "/turns/" +
-        turnid,
-      requestOptions
-    )
+      "http://fauques.freeboxos.fr:3000/matches/" + intel._id + "/turns/" + turnid,requestOptions)
       .then((response) => response.json())
       .then((data) => {
         console.log(data);
-        let incr = turnid + 1;
-        setTurnid(incr);
         setChoice("");
-        if (data.match === "Match already finished") {
+        if (mended.type === "MATCH_ENDED") {
           navigate("/partylist");
         }
       })
       .catch((error) => {
         console.log(error);
       });
-    console.log(requestOptions);
   }
 
   useEffect(() => {
