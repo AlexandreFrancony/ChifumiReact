@@ -75,7 +75,6 @@ export default function InGameTiles() {
             console.log(error);
         });
         console.log(requestOptions)
-        
     }
 
     useEffect(() => {

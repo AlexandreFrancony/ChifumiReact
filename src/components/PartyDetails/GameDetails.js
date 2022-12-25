@@ -57,6 +57,10 @@ function GameDetails() {
               ? gamedetail.user2.username
               : "Waiting for another player..."}
           </p>
+          <br />
+          <p>
+            Winner: {gamedetail.winner ? gamedetail.winner.username : "None"}
+          </p>
         </div>
         <div className="go-to-match-button">
           <Link to={`/matches/${gamedetail._id}`} className="link">
