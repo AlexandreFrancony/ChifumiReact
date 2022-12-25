@@ -38,7 +38,6 @@ export default function RegisterCard() {
         console.log(data)
         navigate('/')
       });
-      
   };
 
   return (

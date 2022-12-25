@@ -26,7 +26,8 @@
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
     cursor: pointer;
     background-color: white;
-    
+    margin-bottom: 3.5rem;
+    margin-top: 1rem;
   }
 
 .game-players {

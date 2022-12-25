@@ -32,7 +32,6 @@ function LoginForm() {
     })
     .then(response => response.json())
     .then(data =>{ 
-      console.log(data); 
       (localStorage.setItem('token', data.token))
       navigate('/partylist')
     });

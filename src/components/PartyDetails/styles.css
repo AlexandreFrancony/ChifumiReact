@@ -20,5 +20,13 @@
 }
 
 .return-to-gamelist-button{
+    padding-top: 1rem;
+}
+
+.go-to-match-button{
+    padding-top: 3.5rem;
+}
+
+.winner{
     padding-top: 2rem;
 }

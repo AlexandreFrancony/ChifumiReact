@@ -5,7 +5,8 @@ import { styled } from "@mui/material/styles";
 import Box from "@mui/material/Box";
 import ButtonBase from "@mui/material/ButtonBase";
 import Typography from "@mui/material/Typography";
-import "./Chi-fu-mi-a2.png";
+import Chifumia2 from "./Chi-fu-mi-a2.png";
+import Chifumialone from "./Chi-fu-mi-alone.png";
 import "./styles.css";
 
 function GameList() {
@@ -14,9 +15,9 @@ function GameList() {
 
   const images = [
     {
-      url: '/Chi-fu-mi-a2.png',
-      title: 'Game ready',
-      width: '100%',
+      url: "./Chi-fu-mi-a2.png",
+      title: "Game ready",
+      width: "100%",
     },
     // {
     //     url: "./Chi-fu-mi-alone.png",
@@ -128,35 +129,69 @@ function GameList() {
                     width: image.width,
                   }}
                 >
-                  <Link to={`/partylist/${game._id}`}>
-                  <ImageSrc style={{ backgroundImage: `url(${image.url})` }} />
-                  <ImageBackdrop className="MuiImageBackdrop-root" />
-                  <Image>
-                    <Typography
-                      component="span"
-                      variant="subtitle1"
-                      color="inherit"
-                      sx={{
-                        position: "relative",
-                        p: 4,
-                        pt: 2,
-                        pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
-                      }}
-                    >
-                      {image.title}
-                      <ImageMarked className="MuiImageMarked-root" />
-                    </Typography>
-                  </Image>
-                  </Link>
+                  {game.user2 ? (
+                    <Link to={`/partylist/${game._id}`}>
+                      <ImageSrc
+                        style={{ backgroundImage: `url(${Chifumia2})` }}
+                      />
+                      <ImageBackdrop className="MuiImageBackdrop-root" />
+                      <Image>
+                        <Typography
+                          component="span"
+                          variant="subtitle1"
+                          color="grey.800"
+                          sx={{
+                            position: "relative",
+                            p: 4,
+                            pt: 2,
+                            pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                          }}
+                        >
+                          <div className="game-players">
+                            <p>{image.title}</p>
+                          </div>
+                          <ImageMarked className="MuiImageMarked-root" />
+                        </Typography>
+                      </Image>
+                    </Link>
+                  ) : (
+                    <Link to={`/partylist`}>
+                      <ImageSrc
+                        style={{ backgroundImage: `url(${Chifumialone})` }}
+                      />
+                      <ImageBackdrop className="MuiImageBackdrop-root" />
+                      <Image>
+                        <Typography
+                          component="span"
+                          variant="subtitle1"
+                          color="error"
+                          sx={{
+                            position: "relative",
+                            p: 4,
+                            pt: 2,
+                            pb: (theme) => `calc(${theme.spacing(1)} + 6px)`,
+                          }}
+                        >
+                          <div className="game-players">
+                            <p>Game not ready</p>
+                          </div>
+                          <ImageMarked className="MuiImageMarked-root" />
+                        </Typography>
+                      </Image>
+                    </Link>
+                  )}
                 </ImageButton>
               ))}
             </Box>
             <div className="game-players">
-              <p>Player 1: {game.user1.username}</p>
+              <p>
+                Player 1 : <br></br>
+                {game.user1.username}
+              </p>
             </div>
             <div className="game-players">
               <p>
-                Player 2:
+                Player 2 : <br></br>
                 {game.user2
                   ? game.user2.username
                   : "Waiting for another player..."}

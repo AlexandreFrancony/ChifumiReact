@@ -42,36 +42,52 @@ function GameDetails() {
     return (
       <div className="game-details">
         <div className="game-id">
-          <p>Game ID: {gamedetail._id}</p>
+          <p>Game ID : {gamedetail._id}</p>
         </div>
         <div className="game-players">
-          <p>Player 1: {gamedetail.user1.username}</p>
+          <p>Player 1 <br></br>             <br></br>
+            {gamedetail.user1.username}</p>
         </div>
         <h1>
           <GiBattleAxe />
         </h1>
         <div className="game-players">
           <p>
-            Player 2:
+
             {gamedetail.user2
               ? gamedetail.user2.username
-              : "Waiting for another player..."}
+              : " Waiting for another player..."}
+                          <br></br>
+                          <br></br>
+              Player 2  
           </p>
           <br />
-          <p>
-            Winner: {gamedetail.winner ? gamedetail.winner.username : "To be determined..."}
-          </p>
-        </div>
-        <div className="go-to-match-button">
-          <Link to={`/matches/${gamedetail._id}`} className="link">
-            <Button variant="contained" disableElevation color="success">
-              Go to the match !
-            </Button>
-          </Link>
+          <div className="winner">
+            Winner:{" "}
+            {gamedetail.winner ? (
+              gamedetail.winner.username
+            ) : (
+              <div>
+                {" "}
+              Waiting for a winner...
+                <div className="go-to-match-button">
+                  <Link to={`/matches/${gamedetail._id}`} className="link">
+                    <Button
+                      variant="contained"
+                      disableElevation
+                      color="success"
+                    >
+                      Go to the match !
+                    </Button>
+                  </Link>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
         <div className="return-to-gamelist-button">
           <Link to="/partylist" className="link">
-            <Button variant="contained">Return to GameList</Button>
+            <Button variant="contained">Return to Game List</Button>
           </Link>
         </div>
       </div>

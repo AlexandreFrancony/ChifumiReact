@@ -37,7 +37,7 @@ export default function InGameTiles() {
       console.log(e);
       const data = JSON.parse(e.data);
       console.log(data);
-      switch (data){
+      switch (data.type){
         case "PLAYER1_MOVED":
           setP1move(data);
           break;
@@ -46,12 +46,14 @@ export default function InGameTiles() {
           break;
         case "TURN_ENDED":
           setTended(data);
+          setTurnid(data.payload.newTurnId)
+          setChoice("");
           break;
         case "MATCH_ENDED":
           setMended(data);
           break;
         case "NEW_TURN":
-          setTurnid(data.payload.turnId);
+          
           break;
         default:
           console.log("error in switch eventSource");
@@ -76,16 +78,11 @@ export default function InGameTiles() {
         console.log(data);
         setIsLoaded(true);
         setIntel(data);
-        setTurnid(1);
+        setTurnid(data.turns.length+1);
       });
   }, [id]);
 
   function HandleClick(c) {
-    //TODO : gestion du click sur les boutons selon l'utilisateur et le tour ainsi que le choix de l'adversaire
-
-
-
-
     switch (c) {
       case "rock":
         setChoice("rock");
@@ -119,7 +116,7 @@ export default function InGameTiles() {
         console.log(data);
         setChoice("");
         if (mended.type === "MATCH_ENDED") {
-          navigate("/partylist");
+          navigate("/partylist/" + intel._id);
         }
       })
       .catch((error) => {
@@ -149,7 +146,7 @@ export default function InGameTiles() {
       <div className="Wrapper">
         <h2>{intel.user1.username + " vs " + intel.user2.username}</h2>
         <h3>{"ID of the current match : " + intel._id}</h3>
-        <h3>{"Turn n°" + turnid}</h3>
+        {turnid === 4? <h3>Match ended</h3> : <h3>{"Turn n°" + turnid}</h3>}
         <div className="tiles">
           <div className="Card">
             <h3 className="icons">Rock</h3>
@@ -177,6 +174,34 @@ export default function InGameTiles() {
         <Link to="/partylist" className="link">
           <Button variant="contained">Return to GameList</Button>
         </Link>
+        </div>
+        <div className="winner">
+          {tended.type === "TURN_ENDED" ? (
+            <h2>
+              {tended.payload.winner === "draw" ? (
+                <h2>It's a draw !</h2>
+              ) : tended.payload.winner === "user1" ? (
+                <h2>{intel.user1.username + " won this turn !"}</h2>
+              ) : tended.payload.winner === "user2" ? (
+                <h2>{intel.user2.username + " won this turn !"}</h2>
+              ) : (
+                <h2>error in switch tended</h2>
+              )}
+            </h2>
+          ) : (
+            <h2>Waiting for the turn to end</h2>
+          )}
+          {mended.type === "MATCH_ENDED" ? (
+            <h2>
+              {mended.payload.winner === "draw" ? (
+                <h2>It's a draw !</h2>
+              ) : (
+                <h2>{mended.payload.winner} won this match!</h2>
+              )}
+            </h2>
+          ) : (
+            <h2>Waiting for the match to end</h2>
+          )}
         </div>
       </div>
     );
