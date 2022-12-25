@@ -4,6 +4,7 @@ import "./styles.css";
 import { useNavigate, useParams } from "react-router-dom";
 import { Button } from "@mui/material";
 import { Link } from "react-router-dom";
+import { EventSourcePolyfill } from "event-source-polyfill";
 
 export default function InGameTiles() {
   const [turnid, setTurnid] = useState("");
@@ -12,9 +13,54 @@ export default function InGameTiles() {
   const [intel, setIntel] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
 
+  const [p1move, setP1move] = useState("");
+  const [p2move, setP2move] = useState("");
+  const [tended, setTended] = useState("");
+  const [mended, setMended] = useState("");
+
   const navigate = useNavigate();
 
   const { id } = useParams();
+
+  useEffect(() => {
+    const eventSource = new EventSourcePolyfill(
+      `http://fauques.freeboxos.fr:3000/matches/${id}/subscribe`,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: "Bearer " + localStorage.getItem("token"),
+        },
+      }
+    );
+
+    eventSource.onmessage = (e) => {
+      console.log(e);
+      const data = JSON.parse(e.data);
+      console.log(data);
+      switch (data){
+        case "PLAYER1_MOVED":
+          setP1move(data);
+          break;
+        case "PLAYER2_MOVED":
+          setP2move(data);
+          break;
+        case "TURN_ENDED":
+          setTended(data);
+          break;
+        case "MATCH_ENDED":
+          setMended(data);
+          break;
+        default:
+          console.log("error in switch eventSource");
+          break;
+      }
+    };
+    return () => {
+      eventSource.close();
+    };
+  }, [id]);
+
+
 
   useEffect(() => {
     fetch(`http://fauques.freeboxos.fr:3000/matches/${id}`, {
@@ -33,8 +79,13 @@ export default function InGameTiles() {
       });
   }, [id]);
 
-  function HandleClick(e) {
-    switch (e) {
+  function HandleClick(c) {
+    //gestion du click sur les boutons selon l'utilisateur et le tour ainsi que le choix de l'adversaire
+    
+
+
+
+    switch (c) {
       case "rock":
         setChoice("rock");
         break;
