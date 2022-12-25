@@ -116,7 +116,7 @@ export default function InGameTiles() {
         console.log(data);
         setChoice("");
         if (mended.type === "MATCH_ENDED") {
-          navigate("/partylist" + intel._id);
+          navigate("/partylist/" + intel._id);
         }
       })
       .catch((error) => {
@@ -193,11 +193,11 @@ export default function InGameTiles() {
           )}
           {mended.type === "MATCH_ENDED" ? (
             <h2>
-              {mended.payload.winner === "DRAW" ? (
+              {mended.payload.winner === "draw" ? (
                 <h2>It's a draw !</h2>
-              ) : mended.payload.winner === "PLAYER1" ? (
+              ) : mended.payload.winner === "user1" ? (
                 <h2>{intel.user1.username + " won this match !"}</h2>
-              ) : mended.payload.winner === "PLAYER2" ? (
+              ) : mended.payload.winner === "user2" ? (
                 <h2>{intel.user2.username + " won this match !"}</h2>
               ) : (
                 <h2>error in switch mended</h2>
