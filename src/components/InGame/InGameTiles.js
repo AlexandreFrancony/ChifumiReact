@@ -78,7 +78,7 @@ export default function InGameTiles() {
         console.log(data);
         setIsLoaded(true);
         setIntel(data);
-        setTurnid(1);
+        setTurnid(data.turns.length);
       });
   }, [id]);
 
@@ -174,6 +174,51 @@ export default function InGameTiles() {
         <Link to="/partylist" className="link">
           <Button variant="contained">Return to GameList</Button>
         </Link>
+        </div>
+        <div className="winner">
+          {p1move.type === "PLAYER1_MOVED" && p2move.type === "PLAYER2_MOVED" ? (
+            <h2>
+              {intel.user1.username +
+                " played " +
+                p1move.payload.move +
+                " and " +
+                intel.user2.username +
+                " played " +
+                p2move.payload.move}
+            </h2>
+          ) : (
+            <h2>Waiting for the other player to play</h2>
+          )}
+          {tended.type === "TURN_ENDED" ? (
+            <h2>
+              {tended.payload.winner === "DRAW" ? (
+                <h2>It's a draw !</h2>
+              ) : tended.payload.winner === "PLAYER1" ? (
+                <h2>{intel.user1.username + " won this turn !"}</h2>
+              ) : tended.payload.winner === "PLAYER2" ? (
+                <h2>{intel.user2.username + " won this turn !"}</h2>
+              ) : (
+                <h2>error in switch tended</h2>
+              )}
+            </h2>
+          ) : (
+            <h2>Waiting for the turn to end</h2>
+          )}
+          {mended.type === "MATCH_ENDED" ? (
+            <h2>
+              {mended.payload.winner === "DRAW" ? (
+                <h2>It's a draw !</h2>
+              ) : mended.payload.winner === "PLAYER1" ? (
+                <h2>{intel.user1.username + " won this match !"}</h2>
+              ) : mended.payload.winner === "PLAYER2" ? (
+                <h2>{intel.user2.username + " won this match !"}</h2>
+              ) : (
+                <h2>error in switch mended</h2>
+              )}
+            </h2>
+          ) : (
+            <h2>Waiting for the match to end</h2>
+          )}
         </div>
       </div>
     );
