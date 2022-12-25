@@ -146,7 +146,7 @@ export default function InGameTiles() {
       <div className="Wrapper">
         <h2>{intel.user1.username + " vs " + intel.user2.username}</h2>
         <h3>{"ID of the current match : " + intel._id}</h3>
-        <h3>{"Turn n°" + turnid}</h3>
+        {turnid === 4? <h3>Match ended</h3> : <h3>{"Turn n°" + turnid}</h3>}
         <div className="tiles">
           <div className="Card">
             <h3 className="icons">Rock</h3>
@@ -195,12 +195,8 @@ export default function InGameTiles() {
             <h2>
               {mended.payload.winner === "draw" ? (
                 <h2>It's a draw !</h2>
-              ) : mended.payload.winner === "user1" ? (
-                <h2>{intel.user1.username + " won this match !"}</h2>
-              ) : mended.payload.winner === "user2" ? (
-                <h2>{intel.user2.username + " won this match !"}</h2>
               ) : (
-                <h2>error in switch mended</h2>
+                <h2>{mended.payload.winner} won this match!</h2>
               )}
             </h2>
           ) : (
