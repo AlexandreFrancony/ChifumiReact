@@ -2,6 +2,8 @@ import React from 'react'
 import { useState} from 'react';
 import { useNavigate } from 'react-router-dom';
 import './styles.css';
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
 
 function LoginForm() {
   const [username, setUsername] = useState('');
@@ -42,14 +44,16 @@ function LoginForm() {
       <form onSubmit={handleSubmit}>
       <div className="username">
           <label className="form-label">Username</label><br />
-          <input className="form-input" type="text"  id="username" value={username} onChange = {(e) => handleInputChange(e)} placeholder="Username"/>
+          <TextField className="form-input" type="text"  id="username" value={username} onChange = {(e) => handleInputChange(e)} placeholder="Username"/>
         </div>
+        <br />
         <div className="password">
           <label className="form-label">Password</label><br />
-          <input className="form-input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
+          <TextField className="form-input" type="password"  id="password" value={password} onChange = {(e) => handleInputChange(e)} placeholder="Password"/>
         </div>
+        <br />
         <div className="submit">
-          <button className="form-button" type='Submit'>Login</button>
+          <Button variant="contained" className="form-button" type='Submit'>Login</Button>
         </div>
       </form>
     </div>
