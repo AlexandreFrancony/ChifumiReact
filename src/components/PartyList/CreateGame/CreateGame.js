@@ -14,7 +14,8 @@ export default function CreateGame() {
   };
   fetch('http://fauques.freeboxos.fr:3000/matches', requestOptions)
       .then(response => response.json())
-      .then(data => console.log(data));
+      .then(data => {console.log(data);
+         window.location.reload()});
   };
 
   return (

@@ -9,12 +9,8 @@ import { EventSourcePolyfill } from "event-source-polyfill";
 export default function InGameTiles() {
   const [turnid, setTurnid] = useState("");
   const [choice, setChoice] = useState("");
-
   const [intel, setIntel] = useState({});
   const [isLoaded, setIsLoaded] = useState(false);
-
-  const [p1move, setP1move] = useState("");
-  const [p2move, setP2move] = useState("");
   const [tended, setTended] = useState("");
   const [mended, setMended] = useState("");
 
@@ -38,12 +34,6 @@ export default function InGameTiles() {
       const data = JSON.parse(e.data);
       console.log(data);
       switch (data.type){
-        case "PLAYER1_MOVED":
-          setP1move(data);
-          break;
-        case "PLAYER2_MOVED":
-          setP2move(data);
-          break;
         case "TURN_ENDED":
           setTended(data);
           setTurnid(data.payload.newTurnId)
@@ -53,7 +43,6 @@ export default function InGameTiles() {
           setMended(data);
           break;
         case "NEW_TURN":
-          
           break;
         default:
           console.log("error in switch eventSource");
