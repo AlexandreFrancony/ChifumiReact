@@ -78,7 +78,7 @@ export default function InGameTiles() {
         console.log(data);
         setIsLoaded(true);
         setIntel(data);
-        setTurnid(data.turns.length);
+        setTurnid(data.turns.length+1);
       });
   }, [id]);
 
