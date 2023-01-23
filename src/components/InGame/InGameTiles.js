@@ -122,7 +122,7 @@ export default function InGameTiles() {
   if (!isLoaded) {
     return (
       <div>
-        Error loading ther game, return to the Game List.
+        Error loading the game, return to the Game List.
         <Link to="/partylist">
           <Button variant="outlined" color="error">
             Return to GameList
